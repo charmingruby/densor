@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS sensors
     description varchar,
     sensor_category_id varchar,
     equipment_id varchar,
+    status varchar,
     observation varchar,
     sector_id varchar,
     created_at timestamp DEFAULT now() NOT NULL,
