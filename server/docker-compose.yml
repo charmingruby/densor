@@ -8,7 +8,7 @@ services:
     environment:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_DB=densor-${DATABASE_NAME}
+      - POSTGRES_DB=${DATABASE_NAME}
     volumes:
       - ./.docker/postgres:/var/lib/postgresql/data
     healthcheck:
@@ -17,17 +17,17 @@ services:
       retries: 5
       timeout: 5s
 
-  app:
-    container_name: densor-api
-    image: densor
-    depends_on:
-      postgres:
-        condition: service_healthy
-    build:
-      context: .
-      dockerfile: Dockerfile
-    # depends on the api port
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
+  # app:
+  #   container_name: densor-api
+  #   image: densor
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   # depends on the api port
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - .env
