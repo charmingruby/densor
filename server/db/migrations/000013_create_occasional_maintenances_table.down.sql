@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS occasional_maintenances;
