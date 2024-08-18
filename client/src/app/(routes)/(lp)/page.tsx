@@ -1,10 +1,9 @@
-import { PaddingContainer } from '@/components/padding-container'
-import { Button } from '@/components/ui/button'
+import { SensorAttachmentForm } from './_components/sensor-attachment-form'
 
 export default function Home() {
   return (
-    <PaddingContainer verticalPadding>
-      <Button>test</Button>
-    </PaddingContainer>
+    <div className="flex flex-col flex-1">
+      <SensorAttachmentForm />
+    </div>
   )
 }

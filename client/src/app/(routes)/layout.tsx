@@ -3,9 +3,10 @@ import { PropsWithChildren } from 'react'
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <div className="max-w-4xl mx-auto border-x min-h-screen">
+    <div className="max-w-4xl mx-auto h-screen max-h-screen overflow-hidden flex flex-col flex-1">
       <Header />
-      <div>{children}</div>
+
+      <div className="flex flex-col flex-1 mt-20 overflow-auto">{children}</div>
     </div>
   )
 }

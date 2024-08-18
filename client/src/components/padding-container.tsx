@@ -12,8 +12,8 @@ export function PaddingContainer({
   className,
 }: PaddingContainerProps) {
   const builtClassName = verticalPadding
-    ? `py-4 px-8 ${className}`
-    : `px-8 ${className}`
+    ? `py-4 px-8 max-w-4xl border-x ${className}`
+    : `px-8 max-w-4xl border-x ${className}`
 
   return <div className={cn(builtClassName)}>{children}</div>
 }
