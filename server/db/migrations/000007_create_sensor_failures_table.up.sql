@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS sensor_failures
     title varchar, 
     description varchar,
     rate float,
-    sector_id varchar,
+    sensor_id varchar,
     created_at timestamp DEFAULT now() NOT NULL,
 
 
-FOREIGN KEY (sector_id) REFERENCES sectors(id) );
+FOREIGN KEY (sensor_id) REFERENCES sensors(id) );
