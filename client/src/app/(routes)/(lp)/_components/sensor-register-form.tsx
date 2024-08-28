@@ -21,10 +21,10 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { ArrowRight } from 'lucide-react'
 import { useSensorRegisterController } from './use-sensor-register-controller'
-import { sensorCategories } from '@/data/mocks/sensor-categories'
+import { sensorCategoriesData } from '@/data/mocks/sensor-categories'
 
 export function SensorRegisterForm() {
-  const categories = sensorCategories(4)
+  const categories = sensorCategoriesData(4)
 
   const { form, onSubmit } = useSensorRegisterController()
 

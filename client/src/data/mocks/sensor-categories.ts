@@ -1,7 +1,7 @@
 import { SensorCategory } from '../types/sensor-category'
 import { v4 } from 'uuid'
 
-export function sensorCategories(amount: number): SensorCategory[] {
+export function sensorCategoriesData(amount: number): SensorCategory[] {
   const sensorCategories: SensorCategory[] = []
 
   for (let i = 0; i < amount; i++) {
