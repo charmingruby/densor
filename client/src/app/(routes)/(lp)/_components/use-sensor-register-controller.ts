@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   name: z.string(),
@@ -17,9 +16,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 export function useSensorRegisterController() {
-  const { push } = useRouter()
-
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -31,10 +28,7 @@ export function useSensorRegisterController() {
     },
   })
 
-  function onSubmit(values: FormData) {
-    console.log(values)
-    push('/sensors')
-  }
+  function onSubmit(values: FormData) {}
 
   return { form, onSubmit }
 }

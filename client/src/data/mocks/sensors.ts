@@ -16,7 +16,7 @@ export function sensorsData(amount: number): Sensor[] {
         name: `Categoria ${i}`,
       },
       sensorCategoryId: i.toString(),
-      status: 'On',
+      status: i % 2 === 0 ? 'Ok' : i % 3 === 0 ? 'Manutenção' : 'Falha',
       createdAt: new Date(),
     }
 
