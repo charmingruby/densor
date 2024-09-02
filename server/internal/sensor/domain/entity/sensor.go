@@ -11,7 +11,6 @@ type SensorInput struct {
 	Description      string
 	SensorCategoryID string
 	EquipmentID      string
-	Status           string
 	Observation      string
 	SectorID         string
 }
