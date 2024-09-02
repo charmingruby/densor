@@ -99,5 +99,5 @@ func initDependencies(db *sqlx.DB, router *gin.Engine) {
 	}
 
 	sensorSvc := sensor.NewService(sensorRepo, sensorCategoryRepo, sectorRepo, equipmentRepo)
-	sensor.NewHTTPService(router, sensorSvc)
+	sensor.NewHTTPService(router, sensorSvc).Register()
 }

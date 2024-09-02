@@ -8,10 +8,10 @@ type SensorService interface {
 }
 
 type CreateSensorInputDTO struct {
-	Name             string
-	Description      string
-	SensorCategoryID string
-	EquipmentID      string
-	Observation      string
-	SectorID         string
+	Name               string
+	Description        string
+	SensorCategoryName string
+	EquipmentName      string
+	Observation        string
+	SectorName         string
 }

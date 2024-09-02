@@ -11,7 +11,12 @@ POST {{baseUrl}}/sensors
 Content-Type: application/json
 
 {
-    "name": "dummy example"
+	"name": "Test Name",
+	"description":  "bla bla",
+	"sensor_category_name":  "Pressure",
+	"equipment_name":  "HVAC",
+	"observation":"bla bla",
+	"sector_name": "Electrical"
 }
 
 ###

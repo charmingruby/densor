@@ -10,7 +10,6 @@ func NewResponse(c *gin.Context, code int, data any, message string) {
 	res := Response{
 		Message: message,
 		Data:    data,
-		Code:    code,
 	}
 	c.JSON(code, res)
 }
@@ -18,7 +17,6 @@ func NewResponse(c *gin.Context, code int, data any, message string) {
 type Response struct {
 	Message string `json:"message"`
 	Data    any    `json:"data,omitempty"`
-	Code    int    `json:"status_code"`
 }
 
 func NewCreatedResponse(c *gin.Context, entity string) {
@@ -36,6 +34,10 @@ func NewPayloadError(c *gin.Context, err error) {
 
 func NewEntityError(c *gin.Context, err error) {
 	NewResponse(c, http.StatusUnprocessableEntity, nil, err.Error())
+}
+
+func NewConflictErr(c *gin.Context, err error) {
+	NewResponse(c, http.StatusConflict, nil, err.Error())
 }
 
 func NewBadRequestError(c *gin.Context, err error) {
