@@ -2,19 +2,22 @@ package v1
 
 import (
 	docs "github.com/charmingruby/densor/api"
+	"github.com/charmingruby/densor/internal/sensor/service"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-func NewHandler(router *gin.Engine) *Handler {
+func NewHandler(router *gin.Engine, sensorSvc service.SensorService) *Handler {
 	return &Handler{
-		router: router,
+		router:    router,
+		sensorSvc: sensorSvc,
 	}
 }
 
 type Handler struct {
-	router *gin.Engine
+	router    *gin.Engine
+	sensorSvc service.SensorService
 }
 
 func (h *Handler) Register() {

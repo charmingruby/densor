@@ -13,6 +13,7 @@ import (
 
 	"github.com/charmingruby/densor/config"
 	"github.com/charmingruby/densor/internal/common/api/api_rest"
+	"github.com/charmingruby/densor/internal/sensor"
 	"github.com/charmingruby/densor/internal/sensor/database/postgres_repository"
 	"github.com/charmingruby/densor/pkg/postgres"
 	"github.com/gin-gonic/gin"
@@ -73,12 +74,11 @@ func main() {
 }
 
 func initDependencies(db *sqlx.DB, router *gin.Engine) {
-	// Sensor module
-	_, err := postgres_repository.NewPostgresExampleRepository(db)
+	sensorRepo, err := postgres_repository.NewPostgresSensorRepository(db)
 	if err != nil {
 		slog.Error(fmt.Sprintf("DATABASE REPOSITORY: %s", err.Error()))
 		os.Exit(1)
 	}
-	// exampleSvc := example.NewService(exampleRepo)
-	// example.NewHTTPService(router, exampleSvc).Register()
+	sensorSvc := sensor.NewService(sensorRepo)
+	sensor.NewHTTPService(router, sensorSvc)
 }

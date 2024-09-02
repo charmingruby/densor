@@ -7,18 +7,17 @@ import (
 )
 
 const (
-	createSensor   = "create sensor"
-	findSensorByID = "find sensor by id"
+	createSensor    = "create sensor"
+	findManySensors = "find many sensors"
 )
 
 func sensorQueries() map[string]string {
 	return map[string]string{
 		createSensor: `INSERT INTO sensors
-		(id, name)
-		VALUES ($1, $2)
+		(id, name, description, sensor_category_id, equipment_id, observation, sector_id)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)
 		RETURNING *`,
-		findSensorByID: `SELECT * FROM sensors 
-		WHERE id = $1`,
+		findManySensors: `SELECT * FROM sensors`,
 	}
 }
 
@@ -57,17 +56,22 @@ func (r *PostgresSensorRepository) statement(queryName string) (*sqlx.Stmt, erro
 	return stmt, nil
 }
 
-func (r *PostgresSensorRepository) Store(e *entity.Sensor) error {
+func (r *PostgresSensorRepository) Store(e entity.Sensor) error {
 	stmt, err := r.statement(createSensor)
 	if err != nil {
 		return err
 	}
 
-	mappedEntity := mapper.DomainSensorToPostgres(*e)
+	mappedEntity := mapper.DomainSensorToPostgres(e)
 
 	if _, err := stmt.Exec(
 		mappedEntity.ID,
 		mappedEntity.Name,
+		mappedEntity.Description,
+		mappedEntity.SensorCategoryID,
+		mappedEntity.EquipmentID,
+		mappedEntity.Observation,
+		mappedEntity.SectorID,
 	); err != nil {
 		return err
 	}
@@ -75,18 +79,23 @@ func (r *PostgresSensorRepository) Store(e *entity.Sensor) error {
 	return nil
 }
 
-func (r *PostgresSensorRepository) FindMany(id string) (*entity.Sensor, error) {
-	stmt, err := r.statement(findSensorByID)
+func (r *PostgresSensorRepository) FindMany() ([]entity.Sensor, error) {
+	stmt, err := r.statement(findManySensors)
 	if err != nil {
 		return nil, err
 	}
 
-	var sensor mapper.PostgresSensor
-	if err := stmt.Get(&sensor, id); err != nil {
+	var pgSensors []mapper.PostgresSensor
+	if err := stmt.Select(&pgSensors); err != nil {
 		return nil, err
 	}
 
-	mappedSensor := mapper.PostgresSensorToDomain(sensor)
+	var sensors []entity.Sensor
+	for _, s := range pgSensors {
+		sensors = append(sensors,
+			mapper.PostgresSensorToDomain(s),
+		)
+	}
 
-	return &mappedSensor, nil
+	return sensors, nil
 }

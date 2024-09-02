@@ -23,7 +23,7 @@ func NewSensor(in SensorInput) Sensor {
 		Description:      in.Description,
 		SensorCategoryID: in.SensorCategoryID,
 		EquipmentID:      in.EquipmentID,
-		Status:           in.Status,
+		Status:           "Ok",
 		Observation:      in.Observation,
 		SectorID:         in.SectorID,
 		CreatedAt:        time.Now(),

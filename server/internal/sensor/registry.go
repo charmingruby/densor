@@ -12,6 +12,6 @@ func NewService(sensorRepo repository.SensorRepository) service.SensorService {
 	return service.NewSensorService(sensorRepo)
 }
 
-func NewHTTPService(router *gin.Engine) *v1.Handler {
-	return v1.NewHandler(router)
+func NewHTTPService(router *gin.Engine, sensorSvc service.SensorService) *v1.Handler {
+	return v1.NewHandler(router, sensorSvc)
 }
