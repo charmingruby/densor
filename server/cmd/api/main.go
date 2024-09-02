@@ -79,6 +79,25 @@ func initDependencies(db *sqlx.DB, router *gin.Engine) {
 		slog.Error(fmt.Sprintf("DATABASE REPOSITORY: %s", err.Error()))
 		os.Exit(1)
 	}
-	sensorSvc := sensor.NewService(sensorRepo)
+
+	sectorRepo, err := postgres_repository.NewPostgresSectorRepository(db)
+	if err != nil {
+		slog.Error(fmt.Sprintf("DATABASE REPOSITORY: %s", err.Error()))
+		os.Exit(1)
+	}
+
+	sensorCategoryRepo, err := postgres_repository.NewPostgresSensorCategoryRepository(db)
+	if err != nil {
+		slog.Error(fmt.Sprintf("DATABASE REPOSITORY: %s", err.Error()))
+		os.Exit(1)
+	}
+
+	equipmentRepo, err := postgres_repository.NewPostgresEquipmentRepository(db)
+	if err != nil {
+		slog.Error(fmt.Sprintf("DATABASE REPOSITORY: %s", err.Error()))
+		os.Exit(1)
+	}
+
+	sensorSvc := sensor.NewService(sensorRepo, sensorCategoryRepo, sectorRepo, equipmentRepo)
 	sensor.NewHTTPService(router, sensorSvc)
 }

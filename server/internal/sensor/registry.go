@@ -8,8 +8,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewService(sensorRepo repository.SensorRepository) service.SensorService {
-	return service.NewSensorService(sensorRepo)
+func NewService(
+	sensorRepo repository.SensorRepository,
+	sensorCategoryRepo repository.SensorCategoryRepository,
+	sectorRepo repository.SectorRepository,
+	equipmentRepo repository.EquipmentRepository,
+) service.SensorService {
+	return service.NewSensorService(sensorRepo, sensorCategoryRepo, sectorRepo, equipmentRepo)
 }
 
 func NewHTTPService(router *gin.Engine, sensorSvc service.SensorService) *v1.Handler {
