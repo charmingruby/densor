@@ -13,5 +13,5 @@ func NewService(sensorRepo repository.SensorRepository) service.SensorService {
 }
 
 func NewHTTPService(router *gin.Engine, sensorSvc service.SensorService) *v1.Handler {
-	return v1.NewHandler(router, sensorSvc)
+	return v1.NewHandler(router, &sensorSvc)
 }

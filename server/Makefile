@@ -42,10 +42,6 @@ docker-run:
 run:
 	go run cmd/api/main.go
 
-.PHONY: docs
-docs:
-	swag init -g swagger.go -d ./internal/common/api/ -o ./api --parseDependency --parseInternal
-
 .PHONY: build
 build:
 	CGO_ENABLED=0 GOOS=linux go build -o ./bin/densor ./cmd/api/main.go

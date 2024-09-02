@@ -1,6 +1,10 @@
 package v1
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/charmingruby/densor/internal/common/api/api_rest"
+	"github.com/charmingruby/densor/internal/sensor/domain/usecase"
+	"github.com/gin-gonic/gin"
+)
 
 type CreateSensorRequest struct {
 	Name             string `json:"name" binding:"required"`
@@ -11,16 +15,24 @@ type CreateSensorRequest struct {
 	SectorID         string `json:"sector_id"`
 }
 
-// Create Sensor godoc
-//
-//	@Summary		Creates an sensor
-//	@Description	Creates an sensor
-//	@Tags			Sensors
-//	@Accept			json
-//	@Produce		json
-//	@Param			request	body		CreateSensorRequest	true	"Create Sensor Payload"
-//	@Success		201		{object}	api_rest.Response
-//	@Failure		400		{object}	api_rest.Response
-//	@Failure		500		{object}	api_rest.Response
-//	@Router			/sensors [post]
-func (h *Handler) createSensorEndpoint(c *gin.Context) {}
+func (h *Handler) createSensorEndpoint(c *gin.Context) {
+	var req CreateSensorRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		api_rest.NewPayloadError(c, err)
+		return
+	}
+
+	if err := h.sensorSvc.CreateSensorUseCase(usecase.CreateSensorInputDTO{
+		Name:             req.Name,
+		Description:      req.Description,
+		SensorCategoryID: req.SensorCategoryID,
+		EquipmentID:      req.EquipmentID,
+		Observation:      req.Observation,
+		SectorID:         req.SectorID,
+	}); err != nil {
+		api_rest.NewInternalServerError(c, err)
+		return
+	}
+
+	api_rest.NewCreatedResponse(c, "sensor")
+}
