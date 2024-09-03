@@ -1,11 +1,11 @@
 'use client'
 
-import { sensorStatus } from '@/data/mocks/sensor-status'
-import { sensorsData } from '@/data/mocks/sensors'
+import { parseFetchSensorResult } from '@/data/api/fetch-sensors'
+import { sensorStatus } from '@/data/types/sensor-status'
 import { Sensor } from '@/data/types/sensor'
+import { api } from '@/lib/axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -29,10 +29,13 @@ export function useSearchSensorController() {
     },
   })
 
-  const bootstrap = () => {
-    const sensors = sensorsData(20)
-    setSensors(sensors)
-    setSensorsResult(sensors)
+  const bootstrap = async () => {
+    const { data } = await api.get('/sensors')
+
+    const result = parseFetchSensorResult(data)
+
+    setSensors(result)
+    setSensorsResult(result)
   }
 
   function onSubmit(values: FormData) {

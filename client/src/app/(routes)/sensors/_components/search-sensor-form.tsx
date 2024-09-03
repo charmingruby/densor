@@ -19,7 +19,13 @@ export function SearchSensorForm() {
   const { bootstrap, sensorsResult, form, onSubmit, statusOptions } =
     useSearchSensorController()
 
-  useEffect(() => bootstrap(), [])
+  useEffect(() => {
+    const fetchData = async () => {
+      await bootstrap()
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -81,17 +87,15 @@ export function SearchSensorForm() {
       </Form>
 
       <div className="flex flex-col gap-4">
-        {sensorsResult.map(
-          ({ id, name, description, sensorCategory, status }) => (
-            <SensorCard
-              key={id}
-              name={name}
-              description={description}
-              sensorCategoryName={sensorCategory.name}
-              status={status}
-            />
-          ),
-        )}
+        {sensorsResult.map(({ id, name, description, observation, status }) => (
+          <SensorCard
+            key={id}
+            name={name}
+            observation={observation}
+            description={description}
+            status={status}
+          />
+        ))}
       </div>
     </>
   )

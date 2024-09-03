@@ -11,7 +11,7 @@ export function StatusAnnotation({ status }: StatusAnnotationProps) {
         <CircleDashed width={10} strokeWidth={3} className="text-primary" />
         <strong className="text-xs">Status:</strong>
       </div>
-      <span className="text-xs text-primary">{status}</span>
+      <span className="text-xs font-medium text-primary">{status}</span>
     </div>
   )
 }

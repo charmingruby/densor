@@ -3,9 +3,6 @@ export interface Sensor {
   name: string
   description: string
   sensorCategoryId: string
-  sensorCategory: {
-    name: string
-  }
   equipmentId: string
   status: string
   observation: string
