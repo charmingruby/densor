@@ -1,6 +1,6 @@
 'use client'
 
-import { parseFetchSensorResult } from '@/data/api/fetch-sensors'
+import { parseFetchSensorsResult } from '@/data/api/fetch-sensors'
 import { sensorStatus } from '@/data/types/sensor-status'
 import { Sensor } from '@/data/types/sensor'
 import { api } from '@/lib/axios'
@@ -32,7 +32,7 @@ export function useSearchSensorController() {
   const bootstrap = async () => {
     const { data } = await api.get('/sensors')
 
-    const result = parseFetchSensorResult(data)
+    const result = parseFetchSensorsResult(data)
 
     setSensors(result)
     setSensorsResult(result)

@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useSearchSensorController } from './use-search-sensor-controller'
+import { useSearchSensorController } from '../../../../hooks/form/use-search-sensor-controller'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { SensorCard } from './sensor-card'
 import { useEffect } from 'react'

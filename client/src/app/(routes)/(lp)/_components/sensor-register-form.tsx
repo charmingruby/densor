@@ -20,13 +20,21 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { ArrowRight } from 'lucide-react'
-import { useSensorRegisterController } from './use-sensor-register-controller'
-import { sensorCategoriesData } from '@/data/mocks/sensor-categories'
+import { useSensorRegisterController } from '../../../../hooks/form/use-sensor-register-controller'
+import { useEffect } from 'react'
+import { RequiredFieldContainer } from '@/components/required-field-indicator'
 
 export function SensorRegisterForm() {
-  const categories = sensorCategoriesData(4)
+  const { form, onSubmit, bootstrap, categories } =
+    useSensorRegisterController()
 
-  const { form, onSubmit } = useSensorRegisterController()
+  useEffect(() => {
+    const fetchData = async () => {
+      bootstrap()
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <Form {...form}>
@@ -43,7 +51,9 @@ export function SensorRegisterForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome</FormLabel>
+                <RequiredFieldContainer>
+                  <FormLabel>Nome</FormLabel>
+                </RequiredFieldContainer>
                 <FormControl>
                   <Input placeholder="Nome do sensor" {...field} />
                 </FormControl>
@@ -57,7 +67,9 @@ export function SensorRegisterForm() {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descrição</FormLabel>
+                <RequiredFieldContainer>
+                  <FormLabel>Descrição</FormLabel>
+                </RequiredFieldContainer>
                 <FormControl>
                   <Input
                     placeholder="Descrição sobre o motivo da implantação"
@@ -71,15 +83,12 @@ export function SensorRegisterForm() {
 
           <FormField
             control={form.control}
-            name="equipmentId"
+            name="equipmentName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Código do equipamento</FormLabel>
+                <FormLabel>Nome do equipamento</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Identificador do equipamento"
-                    {...field}
-                  />
+                  <Input placeholder="Nome do equipamento" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -88,12 +97,12 @@ export function SensorRegisterForm() {
 
           <FormField
             control={form.control}
-            name="sectorId"
+            name="sectorName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Código do setor</FormLabel>
+                <FormLabel>Nome do setor</FormLabel>
                 <FormControl>
-                  <Input placeholder="Identificador do setor" {...field} />
+                  <Input placeholder="Nome do setor" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -102,10 +111,12 @@ export function SensorRegisterForm() {
 
           <FormField
             control={form.control}
-            name="categoryId"
+            name="categoryName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Categoria</FormLabel>
+                <RequiredFieldContainer>
+                  <FormLabel>Categoria</FormLabel>
+                </RequiredFieldContainer>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -117,7 +128,7 @@ export function SensorRegisterForm() {
                   </FormControl>
                   <SelectContent>
                     {categories.map(({ id, name }) => (
-                      <SelectItem key={id} value={id}>
+                      <SelectItem key={id} value={name}>
                         {name}
                       </SelectItem>
                     ))}
