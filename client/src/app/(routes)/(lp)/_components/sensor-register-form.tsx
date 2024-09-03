@@ -22,11 +22,20 @@ import { Textarea } from '@/components/ui/textarea'
 import { ArrowRight } from 'lucide-react'
 import { useSensorRegisterController } from './use-sensor-register-controller'
 import { sensorCategoriesData } from '@/data/mocks/sensor-categories'
+import { useEffect } from 'react'
 
 export function SensorRegisterForm() {
   const categories = sensorCategoriesData(4)
 
-  const { form, onSubmit } = useSensorRegisterController()
+  const { form, onSubmit, bootstrap } = useSensorRegisterController()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await bootstrap()
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <Form {...form}>

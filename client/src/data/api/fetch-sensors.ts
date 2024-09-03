@@ -1,15 +1,15 @@
 import { Sensor } from '../types/sensor'
 
 export interface APISensor {
-  ID: string
-  Name: string
-  Description: string
-  SensorCategoryID: string
-  EquipmentID: string
-  Status: string
-  Observation: string
-  SectorID: string
-  CreatedAt: string
+  id: string
+  name: string
+  description: string
+  sensor_category_id: string
+  equipment_id: string
+  status: string
+  observation: string
+  sector_id: string
+  created_at: string
 }
 
 export interface APIData {
@@ -20,15 +20,15 @@ export interface APIData {
 export function parseFetchSensorResult({ data }: APIData): Sensor[] {
   const parsedResults = data.map((sensor) => {
     const parsedSensor: Sensor = {
-      id: sensor.ID,
-      name: sensor.Name,
-      description: sensor.Description,
-      sensorCategoryId: sensor.SensorCategoryID,
-      equipmentId: sensor.EquipmentID,
-      status: sensor.Status,
-      observation: sensor.Observation,
-      sectorId: sensor.SectorID,
-      createdAt: new Date(sensor.CreatedAt),
+      id: sensor.id,
+      name: sensor.name,
+      description: sensor.description,
+      sensorCategoryId: sensor.sensor_category_id,
+      equipmentId: sensor.equipment_id,
+      status: sensor.status,
+      observation: sensor.observation,
+      sectorId: sensor.sector_id,
+      createdAt: new Date(sensor.created_at),
     }
     return parsedSensor
   })
