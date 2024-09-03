@@ -15,12 +15,12 @@ Content-Type: application/json
 	"description":  "bla bla",
 	"sensor_category_name":  "Pressure",
 	"equipment_name":  "HVAC",
-	"observation":"bla bla",
-	"sector_name": "Electrical"
+	"sector_name": "Electrical",
+	"observation":"bla bla"
 }
 
 ###
 
 # @name fetch_sensors
-GET {{baseUrl}}/examples/0767cc1d-c723-4963-8c66-8937721cd514
+GET {{baseUrl}}/sensors
 Content-Type: application/json

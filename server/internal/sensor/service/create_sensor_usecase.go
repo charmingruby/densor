@@ -26,8 +26,6 @@ func (s *SensorService) CreateSensorUseCase(in usecase.CreateSensorInputDTO) err
 		return core.NewConflictErr("name")
 	}
 
-	slog.Error(err.Error())
-
 	category, err := s.sensorCategoryRepo.FindByName(in.SensorCategoryName)
 	if err != nil {
 		slog.Info(err.Error())
