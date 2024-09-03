@@ -5,6 +5,7 @@ import "github.com/charmingruby/densor/internal/sensor/domain/entity"
 type SensorService interface {
 	CreateSensorUseCase(dto CreateSensorInputDTO) error
 	FetchSensorsUseCase() ([]entity.Sensor, error)
+	FetchSensorCategoriesUseCase() ([]entity.SensorCategory, error)
 }
 
 type CreateSensorInputDTO struct {

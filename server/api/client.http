@@ -24,3 +24,9 @@ Content-Type: application/json
 # @name fetch_sensors
 GET {{baseUrl}}/sensors
 Content-Type: application/json
+
+###
+
+# @name fetch_sensor_categories
+GET {{baseUrl}}/sensors/categories
+Content-Type: application/json

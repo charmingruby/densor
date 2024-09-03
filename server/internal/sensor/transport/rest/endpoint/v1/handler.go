@@ -24,5 +24,6 @@ func (h *Handler) Register() {
 		v1.GET("/welcome", welcomeEndpoint)
 		v1.POST("/sensors", h.createSensorEndpoint)
 		v1.GET("/sensors", h.fetchSensorsEndpoint)
+		v1.GET("/sensors/categories", h.fetchSensorCategoriesEndpoint)
 	}
 }
