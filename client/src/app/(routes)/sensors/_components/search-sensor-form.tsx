@@ -14,14 +14,24 @@ import { useSearchSensorController } from '../../../../hooks/form/use-search-sen
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { SensorCard } from './sensor-card'
 import { useEffect } from 'react'
+import { Loader } from '@/components/loader'
 
 export function SearchSensorForm() {
-  const { bootstrap, sensorsResult, form, onSubmit, statusOptions } =
-    useSearchSensorController()
+  const {
+    bootstrap,
+    sensorsResult,
+    form,
+    onSubmit,
+    statusOptions,
+    isLoading,
+    setIsLoading,
+  } = useSearchSensorController()
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       await bootstrap()
+      setIsLoading(false)
     }
 
     fetchData()
@@ -86,17 +96,35 @@ export function SearchSensorForm() {
         </form>
       </Form>
 
-      <div className="flex flex-col gap-4">
-        {sensorsResult.map(({ id, name, description, observation, status }) => (
-          <SensorCard
-            key={id}
-            name={name}
-            observation={observation}
-            description={description}
-            status={status}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="flex flex-col flex-1 justify-center items-center w-full">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {sensorsResult.length === 0 ? (
+            <div className="flex flex-col flex-1 justify-center items-center w-full">
+              <span className="text-muted-foreground">
+                Nenhum sensor encontrado.
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {sensorsResult.map(
+                ({ id, name, description, observation, status }) => (
+                  <SensorCard
+                    key={id}
+                    name={name}
+                    observation={observation}
+                    description={description}
+                    status={status}
+                  />
+                ),
+              )}
+            </div>
+          )}
+        </>
+      )}
     </>
   )
 }

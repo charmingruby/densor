@@ -23,6 +23,7 @@ import { ArrowRight } from 'lucide-react'
 import { useSensorRegisterController } from '../../../../hooks/form/use-sensor-register-controller'
 import { useEffect } from 'react'
 import { RequiredFieldContainer } from '@/components/required-field-indicator'
+import Link from 'next/link'
 
 export function SensorRegisterForm() {
   const { form, onSubmit, bootstrap, categories } =
@@ -158,7 +159,13 @@ export function SensorRegisterForm() {
         </PaddingContainer>
 
         <div className="mt-auto w-full fixed bottom-0 z-10">
-          <PaddingContainer className="bg-background border-t h-20 flex items-center justify-end">
+          <PaddingContainer className="bg-background border-t h-20 flex items-center justify-end gap-4">
+            <Button asChild variant="outline">
+              <Link prefetch={false} href="/sensors">
+                <span>Ver sensores</span>
+              </Link>
+            </Button>
+
             <Button className="gap-1" type="submit">
               <span>Registrar</span>
               <ArrowRight className="h-4 w-4" />

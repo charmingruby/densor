@@ -20,16 +20,18 @@ export function SensorCard({
         <div className="space-y-2">
           <div className="flex flex-col gap-1">
             <strong>{name}</strong>
-            <div className="flex gap-1 items-center">
-              <CircleAlert
-                strokeWidth={2.5}
-                width={12}
-                className="text-primary"
-              />
-              <span className="text-muted-foreground text-sm">
-                {observation}
-              </span>
-            </div>
+            {observation && (
+              <div className="flex gap-1 items-center">
+                <CircleAlert
+                  strokeWidth={2.5}
+                  width={12}
+                  className="text-primary"
+                />
+                <span className="text-muted-foreground text-sm">
+                  {observation}
+                </span>
+              </div>
+            )}
           </div>
 
           <div>

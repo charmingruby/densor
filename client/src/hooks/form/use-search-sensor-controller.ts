@@ -18,6 +18,7 @@ type FormData = z.infer<typeof formSchema>
 
 export function useSearchSensorController() {
   const [sensors, setSensors] = useState<Sensor[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [sensorsResult, setSensorsResult] = useState<Sensor[]>([])
   const statusOptions = sensorStatus
 
@@ -58,5 +59,13 @@ export function useSearchSensorController() {
     setSensorsResult(filteredSensors)
   }
 
-  return { bootstrap, sensorsResult, form, onSubmit, statusOptions }
+  return {
+    bootstrap,
+    sensorsResult,
+    form,
+    onSubmit,
+    statusOptions,
+    isLoading,
+    setIsLoading,
+  }
 }
