@@ -30,13 +30,13 @@ func NewSensor(in SensorInput) Sensor {
 }
 
 type Sensor struct {
-	ID               string
-	Name             string
-	Description      string
-	SensorCategoryID string
-	EquipmentID      string
-	Status           string
-	Observation      string
-	SectorID         string
-	CreatedAt        time.Time
+	ID               string    `json:"id"`
+	Name             string    `json:"name"`
+	Description      string    `json:"description"`
+	SensorCategoryID string    `json:"sensor_category_id"`
+	EquipmentID      string    `json:"equipment_id"`
+	Status           string    `json:"status"`
+	Observation      string    `json:"observation"`
+	SectorID         string    `json:"sector_id"`
+	CreatedAt        time.Time `json:"created_at"`
 }
