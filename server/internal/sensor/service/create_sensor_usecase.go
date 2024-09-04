@@ -29,7 +29,7 @@ func (s *SensorService) CreateSensorUseCase(in usecase.CreateSensorInputDTO) err
 	category, err := s.sensorCategoryRepo.FindByName(in.SensorCategoryName)
 	if err != nil {
 		slog.Info(err.Error())
-		return core.NewNotFoundErr("category")
+		return core.NewNotFoundErr("Categoria")
 	}
 
 	var sector entity.Sector
@@ -37,7 +37,7 @@ func (s *SensorService) CreateSensorUseCase(in usecase.CreateSensorInputDTO) err
 		sector, err = s.sectorRepo.FindByName(in.SectorName)
 		if err != nil {
 			slog.Info(err.Error())
-			return core.NewNotFoundErr("sector")
+			return core.NewNotFoundErr("Setor")
 		}
 	}
 
@@ -46,7 +46,7 @@ func (s *SensorService) CreateSensorUseCase(in usecase.CreateSensorInputDTO) err
 		equipment, err = s.equipmentRepo.FindByName(in.EquipmentName)
 		if err != nil {
 			slog.Info(err.Error())
-			return core.NewNotFoundErr("equipment")
+			return core.NewNotFoundErr("Equipamento")
 		}
 	}
 

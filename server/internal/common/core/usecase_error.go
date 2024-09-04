@@ -4,7 +4,7 @@ import "fmt"
 
 func NewInternalErr(location string) error {
 	return &ErrInternal{
-		Message: fmt.Sprintf("internal error on %s", location),
+		Message: fmt.Sprintf("Erro interno em: %s", location),
 	}
 }
 
@@ -18,7 +18,7 @@ func (e *ErrInternal) Error() string {
 
 func NewNotFoundErr(entity string) error {
 	return &ErrNotFound{
-		Message: fmt.Sprintf("%s not found", entity),
+		Message: fmt.Sprintf("%s não encontrado", entity),
 	}
 }
 
@@ -32,7 +32,7 @@ func (e *ErrNotFound) Error() string {
 
 func NewConflictErr(field string) error {
 	return &ErrConflict{
-		Message: fmt.Sprintf("%s is already taken", field),
+		Message: fmt.Sprintf("%s já está em uso", field),
 	}
 }
 
