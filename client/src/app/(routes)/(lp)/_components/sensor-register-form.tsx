@@ -26,7 +26,7 @@ import { RequiredFieldContainer } from '@/components/required-field-indicator'
 import Link from 'next/link'
 
 export function SensorRegisterForm() {
-  const { form, onSubmit, bootstrap, categories } =
+  const { form, onSubmit, bootstrap, categories, isFormReady } =
     useSensorRegisterController()
 
   useEffect(() => {
@@ -166,7 +166,7 @@ export function SensorRegisterForm() {
               </Link>
             </Button>
 
-            <Button className="gap-1" type="submit">
+            <Button className="gap-1" type="submit" disabled={!isFormReady}>
               <span>Registrar</span>
               <ArrowRight className="h-4 w-4" />
             </Button>
