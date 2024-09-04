@@ -14,14 +14,14 @@ VALUES
 -- Data load to equipments table
 INSERT INTO equipments (id, name, model, manufacturer, sector_id, created_at)
 VALUES 
-('equip_001', 'Generator', 'GXT2000', 'PowerCo', 'sector_001', NOW()),
+('equip_001', 'Gerador', 'GXT2000', 'PowerCo', 'sector_001', NOW()),
 ('equip_002', 'HVAC', 'HVAC-X500', 'ClimateTech', 'sector_002', NOW());
 
 -- Data load to sensor_categories table
 INSERT INTO sensor_categories (id, name, description, created_at)
 VALUES 
-('cat_001', 'Temperature', 'Temperature sensors for climate control', NOW()),
-('cat_002', 'Pressure', 'Pressure sensors for hydraulic systems', NOW());
+('cat_001', 'Temperatura', 'Sensores de temperatura para controle climático', NOW()),
+('cat_002', 'Pressão', 'Sensores de pressão para sistemas hidráulicos', NOW());
 
 -- Data load to sensors table
 INSERT INTO sensors (id, name, description, sensor_category_id, equipment_id, status, observation, sector_id, created_at)
